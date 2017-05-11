@@ -1,6 +1,9 @@
 var files = [
 	"midi/billie_jean.mid",
-	"midi/take_on_me.mid"
+	"midi/take_on_me.mid",
+	"midi/bohemian_rhapsody.mid",
+	"midi/under_pressure.mid",
+	"midi/another_brick.mid"
 ];
 
 var instruments = [
@@ -29,15 +32,18 @@ MidiConvert.load( files[ Math.floor( Math.random() * files.length ) ] , function
 
   	  var index = Math.floor(Math.random() * instruments.length);
 	  var synth = instruments[ index ];
-	  
-	  console.log(index);
-	  
-  	  // pass in the note events from one of the tracks as the second argument to Tone.Part 
+	  	  
   	  var midiPart = new Tone.Part(function(time, note) {
-	
-	    //use the events to play the synth
-	    synth.triggerAttackRelease(note.name, note.duration, time, note.velocity)
-	
+  	  	synth.triggerAttackRelease(note.name, note.duration, time, note.velocity);
+  	  	
+  	  	// Animation
+  	  	var offset = 300;
+  	  	
+  	  	onMouseMoved({
+	  	  	pageX: Math.round( Math.random() * offset ) ,
+	  	  	pageY: Math.round( Math.random() * offset ) 
+  	  	});
+  	  	
 	  }, midi.tracks[i].notes).start();
   }
 
